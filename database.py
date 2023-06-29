@@ -49,3 +49,16 @@ class DatabaseManager:
                             VALUES ({placeholders});
                             '''
         self._execute(SQL_INSERT_STATEMENT, values=columns_values)
+
+    def delete_records(self, table_name:str, columns_values: dict, criteria: str):
+        """Deletes records from the database
+        """
+        placeholders = [f'{column_name} = ?' for column_name in columns_values.keys()]
+        delete_criteria = f' {criteria} '.join(placeholders)
+        values = tuple(columns_values.values(()))
+
+        SQL_DELETE_STATEMENT = f'''
+                            DELETE FROM {table_name}
+                            WHERE {delete_criteria};
+                                '''
+        self._execute(SQL_DELETE_STATEMENT, values=values)
