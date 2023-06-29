@@ -35,3 +35,17 @@ class DatabaseManager:
                         '''
 
         self._execute(SQL_CREATE_STATEMENT)
+
+    def create_record(self, table_name: str, columns_values: dict):
+        """Creates records in the database
+        """
+        placeholders = ', '.join('?'*len(columns_values))
+        columns_names = ', '.join(columns_values.keys())
+        columns_values = tuple(columns_values.values())
+
+        SQL_INSERT_STATEMENT = f'''
+                            INSERT INTO {table_name}
+                            ({columns_names})
+                            VALUES ({placeholders});
+                            '''
+        self._execute(SQL_INSERT_STATEMENT, values=columns_values)
