@@ -53,6 +53,7 @@ class AddBookmarkCommand:
             table_name=cls.table_name,
             columns_values=data
         )
+        return 'Bookmark added!'
 
 
 class ListBookmarksCommand:
