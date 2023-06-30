@@ -50,10 +50,11 @@ class DatabaseManager:
                             '''
         self._execute(SQL_INSERT_STATEMENT, values=columns_values)
 
-    def delete_records(self, table_name:str, columns_values: dict, criteria: str):
+    def delete_records(self, table_name: str, columns_values: dict, criteria: str):
         """Deletes records from the database
         """
-        placeholders = [f'{column_name} = ?' for column_name in columns_values.keys()]
+        placeholders = [
+            f'{column_name} = ?' for column_name in columns_values.keys()]
         delete_criteria = f' {criteria} '.join(placeholders)
         values = tuple(columns_values.values(()))
 
@@ -63,14 +64,15 @@ class DatabaseManager:
                                 '''
         self._execute(SQL_DELETE_STATEMENT, values=values)
 
-    def select_records(self, table_name:str, columns_values: dict, order_by=None, criteria=None):
+    def select_records(self, table_name: str, columns_values: dict | None = None, order_by=None, criteria=None):
         """Reads out records from de database
         """
         select_query = f'''SELECT * FROM {table_name}'''
         values = []
 
         if criteria:
-            placeholders = [f'{column_name} = ?' for column_name in columns_values.keys()]
+            placeholders = [
+                f'{column_name} = ?' for column_name in columns_values.keys()]
             select_criteria = f' {criteria} '.join(placeholders)
             values = tuple(columns_values.values(()))
 
@@ -80,4 +82,3 @@ class DatabaseManager:
             select_query += f'ORDER BY {order_by}'
 
         return self._execute(select_query, values=values)
-        

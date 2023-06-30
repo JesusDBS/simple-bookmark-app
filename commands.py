@@ -53,3 +53,24 @@ class AddBookmarkCommand:
             table_name=cls.table_name,
             columns_values=data
         )
+
+
+class ListBookmarksCommand:
+    """Lists the bookmarks
+    """
+    table_name = 'bookmarks'
+
+    def __init__(self, order_by: str = 'date_added') -> None:
+        self.order_by = order_by
+
+    def execute(self):
+        """Reads bookmarks from database
+        """
+        order_by = self.order_by
+
+        res = db.select_records(
+            table_name=self.table_name,
+            order_by=order_by
+        )
+
+        return res.fetchall()
