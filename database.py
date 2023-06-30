@@ -8,8 +8,7 @@ class DatabaseManager:
 
     def __init__(self, db_filename) -> None:
 
-        if os.path.isfile(db_filename):
-            self.__connection = sqlite3.connect(db_filename)
+        self.__connection = sqlite3.connect(db_filename)
 
     def __del__(self):
         self.__connection.close()
