@@ -99,7 +99,7 @@ class QuitCommand:
     """Quites the program
     """
     @classmethod
-    def execute(self):
+    def execute(cls):
         """Quites the program
         """
         sys.exit()
