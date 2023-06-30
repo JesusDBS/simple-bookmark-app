@@ -1,3 +1,4 @@
+import sys
 from datetime import datetime
 from database import DatabaseManager
 
@@ -75,3 +76,30 @@ class ListBookmarksCommand:
         )
 
         return res.fetchall()
+
+
+class DeleteBookmarkCommand:
+    """Deletes bookmarks
+    """
+    table_name = 'bookmarks'
+
+    @classmethod
+    def execute(cls, data: dict):
+        """Deletes bookmarks
+        """
+        db.delete_records(
+            table_name=cls.table_name,
+            columns_values=data,
+            criteria=''
+        )
+        return 'Bookmark deleted!'
+
+
+class QuitCommand:
+    """Quites the program
+    """
+    @classmethod
+    def execute(self):
+        """Quites the program
+        """
+        sys.exit()
