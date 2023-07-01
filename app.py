@@ -87,9 +87,15 @@ class Option:
         return self.name_to_display
 
 
-if __name__ == "__main__":
+def create_bookmark_table():
+    """Creates bookmark table
+    """
     commands.CreateBookmarksTableCommand().execute()
 
+
+def main_loop():
+    """Main loop
+    """
     clear_screen()
     options = {
         'A': Option('Add a bookmark', commands.AddBookmarkCommand(), get_new_bookmark_data),
@@ -101,3 +107,12 @@ if __name__ == "__main__":
 
     print_options(options=options)
     get_option_choice(options=options)
+
+    _ = input('Press ENTER to return to menu')
+
+
+if __name__ == "__main__":
+    create_bookmark_table()
+
+    while True:
+        main_loop()
