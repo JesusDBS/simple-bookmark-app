@@ -75,9 +75,9 @@ class DatabaseManager:
             select_criteria = f' {criteria} '.join(placeholders)
             values = tuple(columns_values.values(()))
 
-            select_query += f'WHERE {select_criteria}'
+            select_query += f' WHERE {select_criteria}'
 
         if order_by:
-            select_query += f'ORDER BY {order_by}'
+            select_query += f' ORDER BY {order_by}'
 
         return self._execute(select_query, values=values)
