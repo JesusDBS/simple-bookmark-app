@@ -9,6 +9,23 @@ def print_options(options: dict):
     print()
 
 
+def get_option_choice(options: dict):
+    """Gets the option from user
+    """
+    while True:
+        choice = input('Plase select an option: ').upper()
+
+        if choice not in options.keys():
+            print()
+            print_options(options)
+
+        else:
+            break
+
+    choice = options.get(choice)
+    choice()
+
+
 class Option:
     """These class holds the logic to be executed when a user choose an option.
     """
@@ -65,3 +82,4 @@ if __name__ == "__main__":
     }
 
     print_options(options=options)
+    get_option_choice(options=options)
