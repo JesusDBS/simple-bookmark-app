@@ -26,6 +26,33 @@ def get_option_choice(options: dict):
     choice()
 
 
+def get_user_input(label: str, required=True):
+    """Gets inputs from user
+    """
+    value = input(f'{label}: ') or None
+
+    while required and not value:
+        value = input(f'{label}: ') or None
+
+    return value
+
+
+def get_new_bookmark_data():
+    """Gets data from new bookmarks
+    """
+    return {
+        'title': get_user_input('Title'),
+        'url': get_user_input('URL'),
+        'notes': get_user_input('Notes', required=False)
+    }
+
+
+def get_bookmark_id_for_deletion():
+    """Gets id for bookmark's delete
+    """
+    return get_user_input('Enter a bookmark ID to delete')
+
+
 class Option:
     """These class holds the logic to be executed when a user choose an option.
     """
@@ -54,10 +81,10 @@ if __name__ == "__main__":
     commands.CreateBookmarksTableCommand().execute()
 
     options = {
-        'A': Option('Add a bookmark', commands.AddBookmarkCommand()),
+        'A': Option('Add a bookmark', commands.AddBookmarkCommand(), get_new_bookmark_data),
         'B': Option('List bookmarks by date', commands.ListBookmarksCommand()),
         'T': Option('List bookmarks by title', commands.ListBookmarksCommand(order_by='title')),
-        'D': Option('Delete a bookmark', commands.DeleteBookmarkCommand()),
+        'D': Option('Delete a bookmark', commands.DeleteBookmarkCommand(), get_bookmark_id_for_deletion),
         'Q': Option('Quit', commands.QuitCommand())
     }
 
