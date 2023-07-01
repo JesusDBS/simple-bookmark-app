@@ -60,7 +60,9 @@ def get_new_bookmark_data():
 def get_bookmark_id_for_deletion():
     """Gets id for bookmark's delete
     """
-    return get_user_input('Enter a bookmark ID to delete')
+    return {
+        'ID': get_user_input('Enter a bookmark ID to delete')
+    }
 
 
 class Option:

@@ -55,7 +55,7 @@ class DatabaseManager:
         placeholders = [
             f'{column_name} = ?' for column_name in columns_values.keys()]
         delete_criteria = f' {criteria} '.join(placeholders)
-        values = tuple(columns_values.values(()))
+        values = tuple(columns_values.values())
 
         SQL_DELETE_STATEMENT = f'''
                             DELETE FROM {table_name}
