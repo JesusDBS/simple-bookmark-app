@@ -16,7 +16,7 @@ def get_option_choice(options: dict):
         choice = input('Plase select an option: ').upper()
 
         if choice not in options.keys():
-            print()
+            print('Invalid choice!')
             print_options(options)
 
         else:
@@ -34,26 +34,6 @@ class Option:
         self.name_to_display = name_to_display
         self.command = command
         self.preparation_step = preparation_step
-
-    # def get_preparation_step_data(self):
-    #     """Takes data from user
-    #     """
-    #     keys = ['title', 'url', 'notes', 'date_added']
-
-    #     message = """Please provide the info in the following order:
-    #         1) bookmark's title
-    #         2) bookmark's URL
-    #         3) bookmark's notes
-    #         4) bookmark's creation date\n
-    #     """
-    #     print(message)
-
-    #     user_input = input(
-    #         "Please give the bookmark info separated by one space: ")
-
-    #     values = [value.strip() for value in user_input.split(' ') if value]
-
-    #     self.data = dict(zip(keys, values))
 
     def __call__(self):
         data = self.preparation_step() if self.preparation_step else None
