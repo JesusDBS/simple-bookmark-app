@@ -1,5 +1,11 @@
-from typing import Any
 import commands
+
+
+def print_options(options: dict):
+    """Prints out the options to the user
+    """
+    for key, val in options.items():
+        print(f'({key})', val)
 
 
 class Options:
@@ -48,3 +54,13 @@ class Options:
 
 if __name__ == "__main__":
     commands.CreateBookmarksTableCommand().execute()
+
+    options = {
+        'A': 'Add a bookmark',
+        'B': 'List bookmarks by date',
+        'T': 'List bookmarks by title',
+        'D': 'Delete a bookmark',
+        'Q': 'Quit'
+    }
+
+    print_options(options=options)
