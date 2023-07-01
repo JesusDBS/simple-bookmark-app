@@ -4,11 +4,12 @@ import commands
 def print_options(options: dict):
     """Prints out the options to the user
     """
-    for key, val in options.items():
-        print(f'({key})', val)
+    for shortcut, option in options.items():
+        print(f'({shortcut})', option)
+    print()
 
 
-class Options:
+class Option:
     """These class holds the logic to be executed when a user choose an option.
     """
 
@@ -56,11 +57,11 @@ if __name__ == "__main__":
     commands.CreateBookmarksTableCommand().execute()
 
     options = {
-        'A': 'Add a bookmark',
-        'B': 'List bookmarks by date',
-        'T': 'List bookmarks by title',
-        'D': 'Delete a bookmark',
-        'Q': 'Quit'
+        'A': Option('Add a bookmark', commands.AddBookmarkCommand()),
+        'B': Option('List bookmarks by date', commands.ListBookmarksCommand()),
+        'T': Option('List bookmarks by title', commands.ListBookmarksCommand(order_by='title')),
+        'D': Option('Delete a bookmark', commands.DeleteBookmarkCommand()),
+        'Q': Option('Quit', commands.QuitCommand())
     }
 
     print_options(options=options)
