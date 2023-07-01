@@ -1,4 +1,12 @@
+import os
 import commands
+
+
+def clear_screen():
+    """Clears the screen
+    """
+    clear = 'cls' if os.name == 'nt' else 'clear'
+    os.system(clear)
 
 
 def print_options(options: dict):
@@ -23,6 +31,8 @@ def get_option_choice(options: dict):
             break
 
     choice = options.get(choice)
+
+    clear_screen()
     choice()
 
 
@@ -80,6 +90,7 @@ class Option:
 if __name__ == "__main__":
     commands.CreateBookmarksTableCommand().execute()
 
+    clear_screen()
     options = {
         'A': Option('Add a bookmark', commands.AddBookmarkCommand(), get_new_bookmark_data),
         'B': Option('List bookmarks by date', commands.ListBookmarksCommand()),
